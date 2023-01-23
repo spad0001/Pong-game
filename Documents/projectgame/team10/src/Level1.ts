@@ -129,7 +129,7 @@ export default class Level1 extends Scene {
         this.player.setPosition(maxY - 450);
         this.pet?.setPosition(maxY - 330)
         this.scoreItems.push(
-          this.bully = new Bully(maxX, maxY - 600, 100, ['The Bully', `Mmmm! Ugly humans! FEAR ME! Hide in fear!`, `I'm not ugly.`, `Whatever, bye.`, `You're ugly!`]);
+          this.bully = new Bully(maxX, maxY - 600, 100, ['The Bully', `Mmmm! Ugly humans! FEAR ME! Hide in fear!`, `I'm not ugly.`, `Whatever, bye.`, `You're ugly!`])
         );
       } else if (JSON.stringify(this.fillerNpc) === JSON.stringify(this.npcInDialogue)) {
         if (debouce === false) {
