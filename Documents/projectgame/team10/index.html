@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name of the game</title>
+    <script src="build/app.js" type="module" defer></script>
+    <style>
+        @keyframes pulse {
+            0% {
+                transform: none;
+            } 50% {
+                transform: scale(1.1);
+            } 100% {
+                transform: none
+            }
+        }
+        @keyframes fade {
+            0% {
+                opacity: 100%;
+            } 50% {
+                opacity: 10%;
+            } 100% {
+                opacity: 100%;
+            }
+        }
+        html, body {
+            max-width: 100%;
+            margin: 0;
+            background-color: 
+            grey;
+            background-position: top;
+        }
+        canvas {
+            margin: auto;
+            background-image: url('./assets/bg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+            width: 100%;
+            background-size: cover;
+        }
+        .gender {
+            width: 100%;
+            position: absolute;
+            top: 62%;
+            right: -50%;
+            transform: translateX(-194px);
+        }
+        .gender img {
+            width: 110px;
+            margin: 0 40px;
+            cursor: pointer;
+        }
+
+        .gender img:hover {
+            transition: 0.5s ease-in-out;
+            animation: pulse 2s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px hsl(240, 60%, 20%));
+        }
+        .row {
+            display: flex;
+        }
+        .column {
+            flex: 25%;
+        }
+        body .dialog-box {
+            position: absolute;
+            width: 300px;
+            padding: 10px;
+            margin: 20px;
+            z-index: 9;
+            font-size: 3em;
+            display: none;
+            bottom: 0px;
+            right: 50%;
+            left: 50%;
+            transform: translateX(-60%);
+        }
+        .p-prompt {
+            text-align: center;
+            animation: fade 2s infinite ease-out;
+            font-size: 1em;
+        }
+        .dialog-prompt {
+            display: flex;
+            position: absolute;
+            background-color: #FFFFFF;
+            border: 4px solid black;
+            border-radius: 10px;
+            width: 450px;
+            height: 250px;
+            /* padding: 2px; */
+            /* background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%), linear-gradient(to bottom, rgba(170, 170, 170, 1) 0%, rgba(170, 170, 170, 1) 100%); */
+            /* background-clip: content-box, padding-box; */
+            /* margin: 30px; */
+            display: none;
+            top: 65%;
+            bottom: 0px;
+            right: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .h1-prompt {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #000;
+            background-color: #AAAAAA;
+            margin: 0;
+            padding: 0; 
+            border-radius: 5px 5px 0 0;
+        }
+        .modal-line-separator {
+            border-top: 2px solid #000;
+            width: 100%;
+            /* margin-bottom: 10px; */
+        }
+        .p-dialog {
+            min-height: 80px;
+            font-size: 2em;
+            padding: 10px;
+            font-family: "Pixelated", sans-serif;
+        }
+        #button-container {
+            /* top: 60%;
+            bottom: 0px;
+            right: 50%;
+            left: 50%; */
+            padding: 3px;
+            margin: 5px;
+            margin-top: 0px;
+        }
+
+        .option-buttons {
+            padding: 10px;
+            height: 50px;
+
+        }
+        .player-image-box {
+            background-color: #fff;
+            border: 1px solid #000;
+            padding: 0px;
+            width: 150%;
+            height: 150%;
+            text-align: center;
+            display: inline-block;
+        }
+        #p-dialog-container {
+            padding: 0px;
+            margin: 0px;
+        }
+        .left-column {
+            position: absolute;
+            top: 50%;
+            left: -400px;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        .footer-line-separator {
+            border-top: 2px solid #000;
+            width: 100%;
+            /* margin-top: 10px; */
+        }
+        .footer-container {
+            background-color: #AAAAAA;
+            border-radius: 0 0 5px 5px;
+
+        }
+        .SceneTransition {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            opacity: 0;
+            animation: scene-transition-fade-in 1.2s forwards;
+        }
+        .SceneTransition.fade-out {
+            animation: scene-transition-fade-out 1.2s forwards;
+        }
+        @keyframes scene-transition-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scene-transition-fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="game"></canvas>
+    <div class="gender">
+        
+        <img src="./assets/players/player-male.svg" alt="">
+        <img src="./assets/players/player-female.svg" alt="">
+    </div>
+    <div class="dialog-box">
+        <p class="p-prompt">Press [E]</p>
+    </div>
+    <div id="quest-dropdown">
+        <div id="quest-box">
+            <div id="quest-title-box">
+                <h1 id="h1-quest">Quest</p>
+            </div>
+            <div>
+                <p id="p-quest-content">Quest2</p>
+                <p id="p-quest-reward">Quest3</p>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-prompt" id="dialog-host">
+        <div class="dialog-content" id="p-dialogContent" >
+            <div>
+                <h1 class="h1-prompt" id="h1-prompt">Modal Title</h1>
+                <div class="modal-line-separator"></div>
+            </div>
+            <div id="p-dialog-container">
+                <p class="p-dialog" id="p-dialog">main</p>
+            </div>
+            <div class="footer-line-separator"></div>
+        <div class="footer-container">
+            <div class="row" id="button-container">
+                <button class="option-buttons column" id="option1">
+                    button
+                </button>
+                <button class="option-buttons column" id="option2">
+                    button
+                </button>
+                <button class="option-buttons column" id="option3">
+                    button
+                </button>
+            </div>
+        </div>    
+        </div>
+    </div>
+</body>
+</html>
