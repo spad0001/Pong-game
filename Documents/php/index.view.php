@@ -18,9 +18,15 @@
 <body>
 
 <header>
-    <h1>
-        <?= $greeting; ?>
-    </h1>
+
+    <ul>
+        <?php
+            foreach ($animals as $animal) {
+                echo "<li>$animal</li>";
+        }
+        ?>
+    </ul>
+
 </header>
 
 

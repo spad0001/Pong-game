@@ -1,7 +1,12 @@
-<?=
+<?php
 
-$greeting = 'HRE';
+$animals = [
+        'Elephant',
+        'Deer',
+        'Dog',
+        'Cat',
+        'Lion'
+];
 
-require 'index.view.php';
+require "index.view.php";
 
-?>
