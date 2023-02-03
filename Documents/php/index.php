@@ -1,5 +1,7 @@
 <?php
 
+require "functions.php";
+
 $task = [
     'title' => 'Go to the gym',
     'due' => 'tomorrow',

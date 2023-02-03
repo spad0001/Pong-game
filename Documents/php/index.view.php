@@ -32,10 +32,10 @@
             <?php if ($task['completed']) : ?>
                 <span class="icon">&#9989;</span>
             <?php else : ?>
-                <span class="icon">Incomplete</span>
+                <span class="icon">&#9747;</span>
 
             <?php endif; ?>
-            
+
         </li>
     </ul>
 
